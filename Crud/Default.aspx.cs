@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using CRUD.EntityLayer;
 using CRUD.BusinessLayer;
+using System.Collections;
 namespace Crud
 {
     public partial class _Default : Page
@@ -22,6 +23,34 @@ namespace Crud
 
             GVEmpleado.DataSource = lista;
             GVEmpleado.DataBind();
+        }
+
+        public void Filtro(object sender, EventArgs e)
+        {
+
+            if ( !filtroIDtxt.Text.Equals("") )
+            {
+                if (!filtroIDtxt.Text.Equals("0"))
+                {
+                    int empleadoid = 0;
+                    try
+                    {
+                        empleadoid = Convert.ToInt32(filtroIDtxt.Text);
+                        List<Empleado> lista = empleadoBL.Filtro(empleadoid);
+
+                        GVEmpleado.DataSource = lista;
+                        GVEmpleado.DataBind();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }else
+                {
+                    MostrarEmpleados();
+                }
+                
+            }
         }
     }
 }

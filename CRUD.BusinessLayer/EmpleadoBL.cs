@@ -37,5 +37,17 @@ namespace CRUD.BusinessLayer
             }
         }
 
+        public List<Empleado> Filtro(int idEmpleado)
+        {
+            try
+            {
+                return personDL.FiltroID(idEmpleado);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }
